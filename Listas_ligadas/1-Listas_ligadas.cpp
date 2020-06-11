@@ -38,7 +38,7 @@ void imprimir(struct Nodo *lista) {
     }
 }
 
-//Funcion para imprimir de manera recursiva
+//Funcion para imprimir de manera recursiva.
 void Rimprimir(struct Nodo *lista) {
     if(lista != NULL) {
         //Se puede intercambiar el orden de las siguientes dos lineas para imprimir los valores
@@ -48,11 +48,35 @@ void Rimprimir(struct Nodo *lista) {
     }
 }
 
+//Funcion para mostrar el numero de nodos en la lista.
+void numNodos(struct Nodo *lista) {
+    int cont = 0;
+    while(lista != NULL) {
+        cont++;
+        lista = lista->next;
+    }
+    cout << "Numero de nodos: " << cont;
+}
+
+//funcion para mostrar el numero de nodos, de manera recursiva
+int RnumNodos(struct Nodo *lista) {
+    if(lista == NULL) {
+        return 0;
+    }
+    else {
+        return RnumNodos(lista->next) + 1;
+    }
+}
+
 int main() {
     int elementos[] = {3, 6, 9, 12, 15, 18};
     crearNodo(&elementos[0], 6);
     imprimir(first);
     cout << endl;
     Rimprimir(first);
+    cout << endl;
+    numNodos(first);
+    cout << endl;
+    cout << "Numero de nodos: " << RnumNodos(first);
     return 0;
 }
