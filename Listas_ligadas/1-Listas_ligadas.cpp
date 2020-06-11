@@ -49,22 +49,42 @@ void Rimprimir(struct Nodo *lista) {
 }
 
 //Funcion para mostrar el numero de nodos en la lista.
-void numNodos(struct Nodo *lista) {
+int numNodos(struct Nodo *lista) {
     int cont = 0;
     while(lista != NULL) {
         cont++;
         lista = lista->next;
     }
-    cout << "Numero de nodos: " << cont;
+    return cont;
 }
 
-//funcion para mostrar el numero de nodos, de manera recursiva
+//Funcion para mostrar el numero de nodos, de manera recursiva
 int RnumNodos(struct Nodo *lista) {
     if(lista == NULL) {
         return 0;
     }
     else {
         return RnumNodos(lista->next) + 1;
+    }
+}
+
+//Funcion para sumar el dato de cada nodo.
+int sumaNodos(struct Nodo *lista) {
+    int suma = 0;
+    while(lista) {
+        suma = suma + lista->dato;
+        lista = lista->next;
+    }
+    return suma;
+}
+
+//Funcion para sumar los datos de cada nodo de manera recursiva.
+int RsumaNodos(struct Nodo *lista) {
+    if(lista == NULL) {
+        return 0;
+    }
+    else {
+        return RsumaNodos(lista->next) + lista->dato;
     }
 }
 
@@ -75,8 +95,12 @@ int main() {
     cout << endl;
     Rimprimir(first);
     cout << endl;
-    numNodos(first);
+    cout << "Numero de nodos: " << numNodos(first);
     cout << endl;
     cout << "Numero de nodos: " << RnumNodos(first);
+    cout << endl;
+    cout << "La suma de todos los nodos es: " << sumaNodos(first);
+    cout << endl;
+    cout << "La suma de todos los nodos es: " << RsumaNodos(first);
     return 0;
 }
