@@ -114,6 +114,26 @@ int RvalMax(struct Nodo *lista) {
         }*/
     }
 }
+//Busqueda de un elemento en la lista.
+Nodo* busqueda(struct Nodo *lista, int elemento) {
+    while(lista != NULL) {
+        if(elemento == lista->dato) {
+            return lista;
+        }
+        lista = lista->next;
+    }
+    return NULL;
+}
+//Busqueda de un elemento de manera recursiva
+Nodo* Rbusqueda(struct Nodo *lista, int elemento) {
+    if(lista == NULL) {
+        return NULL;
+    }
+    if(elemento == lista->dato) {
+        return lista;
+    }
+    return Rbusqueda(lista->next, elemento);
+}
 
 int main() {
     int elementos[] = {3, 6, 39, 12, 115, 1};
@@ -133,5 +153,9 @@ int main() {
     cout << "El valor maximo de la lista es: " << valMax(first);
     cout << endl;
     cout << "El valor maximo de la lista es: " << RvalMax(first);
+    cout << endl;
+    cout << "Direccion del elemento es: " << busqueda(first, 39);
+    cout << endl;
+    cout << "Direccion del elemento es: " << Rbusqueda(first, 39);
     return 0;
 }
