@@ -30,14 +30,13 @@ void crearNodo(int *elementos, int nElements) {
         last = temp;
     }
 }
-
+//Funcion para imprimir la lista ligada.
 void imprimir(struct Nodo *lista) {
     while(lista) {
         cout << lista->dato << " ";
         lista = lista->next;
     }
 }
-
 //Funcion para imprimir de manera recursiva.
 void Rimprimir(struct Nodo *lista) {
     if(lista != NULL) {
@@ -47,7 +46,6 @@ void Rimprimir(struct Nodo *lista) {
         cout << lista->dato << " ";
     }
 }
-
 //Funcion para mostrar el numero de nodos en la lista.
 int numNodos(struct Nodo *lista) {
     int cont = 0;
@@ -57,7 +55,6 @@ int numNodos(struct Nodo *lista) {
     }
     return cont;
 }
-
 //Funcion para mostrar el numero de nodos, de manera recursiva
 int RnumNodos(struct Nodo *lista) {
     if(lista == NULL) {
@@ -67,7 +64,6 @@ int RnumNodos(struct Nodo *lista) {
         return RnumNodos(lista->next) + 1;
     }
 }
-
 //Funcion para sumar el dato de cada nodo.
 int sumaNodos(struct Nodo *lista) {
     int suma = 0;
@@ -77,7 +73,6 @@ int sumaNodos(struct Nodo *lista) {
     }
     return suma;
 }
-
 //Funcion para sumar los datos de cada nodo de manera recursiva.
 int RsumaNodos(struct Nodo *lista) {
     if(lista == NULL) {
@@ -87,9 +82,41 @@ int RsumaNodos(struct Nodo *lista) {
         return RsumaNodos(lista->next) + lista->dato;
     }
 }
+//Funcion para encontrar el valor maximo de una lista ligada.
+int valMax(struct Nodo *lista) {
+    int maximo = INT_MIN;
+
+    while(lista) {
+        if(lista->dato > maximo) {
+            maximo = lista->dato;
+        }
+        lista = lista->next;
+    }
+    return maximo;
+}
+//Funcion para encontrar el valor maximo de manera recursiva.
+int RvalMax(struct Nodo *lista) {
+    int x = 0;
+
+    if(lista == NULL) {
+        return INT_MIN;;
+    }
+    else {
+        x = RvalMax(lista->next);
+        // 1er manera de calcular (comentar o descomentar para probar)
+        return x > lista->dato ? x : lista->dato;
+        // 2da manera de calcular (comentar o descomentar para probar)
+        /*if(x > lista->dato) {
+            return x;
+        }
+        else {
+            return lista->dato;
+        }*/
+    }
+}
 
 int main() {
-    int elementos[] = {3, 6, 9, 12, 15, 18};
+    int elementos[] = {3, 6, 39, 12, 115, 1};
     crearNodo(&elementos[0], 6);
     imprimir(first);
     cout << endl;
@@ -102,5 +129,9 @@ int main() {
     cout << "La suma de todos los nodos es: " << sumaNodos(first);
     cout << endl;
     cout << "La suma de todos los nodos es: " << RsumaNodos(first);
+    cout << endl;
+    cout << "El valor maximo de la lista es: " << valMax(first);
+    cout << endl;
+    cout << "El valor maximo de la lista es: " << RvalMax(first);
     return 0;
 }
