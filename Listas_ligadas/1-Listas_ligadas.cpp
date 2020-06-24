@@ -134,6 +134,21 @@ Nodo* Rbusqueda(struct Nodo *lista, int elemento) {
     }
     return Rbusqueda(lista->next, elemento);
 }
+//Algoritmo de busqueda mejorado
+Nodo* busquedaMejorada(struct Nodo *lista, int elemento) {
+    struct Nodo *enlace = NULL;
+    while(lista != NULL) {
+        if(elemento == lista->dato) {
+            enlace->next = lista->next;
+            lista->next = first;
+            first = lista;
+            return lista;
+        }
+        enlace = lista;
+        lista = lista->next;
+    }
+    return NULL;
+}
 
 int main() {
     int elementos[] = {3, 6, 39, 12, 115, 1};
@@ -157,5 +172,9 @@ int main() {
     cout << "Direccion del elemento es: " << busqueda(first, 39);
     cout << endl;
     cout << "Direccion del elemento es: " << Rbusqueda(first, 39);
+    cout << endl;
+    cout << "Direccion del elemento es: " << busquedaMejorada(first, 115);
+    cout << endl;
+    imprimir(first);
     return 0;
 }
