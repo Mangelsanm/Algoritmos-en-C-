@@ -149,6 +149,29 @@ Nodo* busquedaMejorada(struct Nodo *lista, int elemento) {
     }
     return NULL;
 }
+//Funcion para insertar un nuevo elemento en la lista
+void insertar(int posicion, int elemento) {
+    struct Nodo *lista;
+    Nodo *temporal = NULL;
+
+    if(posicion == 0) {
+        temporal = (struct Nodo*)malloc(sizeof(struct Nodo));
+        temporal->dato = elemento;
+        temporal->next = first;
+        first = temporal;
+    }
+    else if(posicion > 0) {
+        lista = first;
+
+        for (int i = 0; i < posicion - 1; i++) {
+            lista = lista->next;
+        }
+        temporal = (Nodo*)malloc(sizeof(Nodo));
+        temporal->dato = elemento;
+        temporal->next = lista->next;
+        lista->next = temporal;
+    }
+}
 
 int main() {
     int elementos[] = {3, 6, 39, 12, 115, 1};
@@ -174,6 +197,9 @@ int main() {
     cout << "Direccion del elemento es: " << Rbusqueda(first, 39);
     cout << endl;
     cout << "Direccion del elemento es: " << busquedaMejorada(first, 115);
+    cout << endl;
+    imprimir(first);
+    insertar(3, 45);
     cout << endl;
     imprimir(first);
     return 0;
