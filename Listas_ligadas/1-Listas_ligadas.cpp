@@ -6,7 +6,7 @@ struct Nodo
     /* data */
     int dato;
     struct Nodo *next;
-}*first = NULL;
+}*first = NULL, *final = NULL;
 
 void crearNodo(int *elementos, int nElements) {
     struct Nodo *last;
@@ -172,35 +172,32 @@ void insertar(int posicion, int elemento) {
         lista->next = temporal;
     }
 }
+//Funcion para insertar un elemento nuevo a la lista, pero siempre al final.
+void insertarFinal(int valor) {
+    struct Nodo *temporal = (struct Nodo*)malloc(sizeof(struct Nodo));
+    temporal->dato = valor;
+    temporal->next = NULL;
+
+    //Si la lista esta vacia, first y final apuntan a NULL
+    if(first == NULL) {
+        first = final = temporal;
+    }
+    //Si la lista ya tiene al menos un elemento
+    else {
+        final->next = temporal;
+        final = temporal;
+    }
+
+}
 
 int main() {
-    int elementos[] = {3, 6, 39, 12, 115, 1};
-    crearNodo(&elementos[0], 6);
-    imprimir(first);
-    cout << endl;
-    Rimprimir(first);
-    cout << endl;
-    cout << "Numero de nodos: " << numNodos(first);
-    cout << endl;
-    cout << "Numero de nodos: " << RnumNodos(first);
-    cout << endl;
-    cout << "La suma de todos los nodos es: " << sumaNodos(first);
-    cout << endl;
-    cout << "La suma de todos los nodos es: " << RsumaNodos(first);
-    cout << endl;
-    cout << "El valor maximo de la lista es: " << valMax(first);
-    cout << endl;
-    cout << "El valor maximo de la lista es: " << RvalMax(first);
-    cout << endl;
-    cout << "Direccion del elemento es: " << busqueda(first, 39);
-    cout << endl;
-    cout << "Direccion del elemento es: " << Rbusqueda(first, 39);
-    cout << endl;
-    cout << "Direccion del elemento es: " << busquedaMejorada(first, 115);
-    cout << endl;
-    imprimir(first);
-    insertar(3, 45);
-    cout << endl;
+    insertarFinal(1);
+    insertarFinal(2);
+    insertarFinal(3);
+    insertarFinal(4);
+    insertarFinal(5);
+    insertarFinal(6);
+    insertar(4, 10);
     imprimir(first);
     return 0;
 }
