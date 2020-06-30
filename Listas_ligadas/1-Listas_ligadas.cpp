@@ -191,13 +191,40 @@ void insertarFinal(int valor) {
 }
 
 int main() {
-    insertarFinal(1);
+    int elementos[] = {3, 6, 39, 12, 115, 1};
+    crearNodo(&elementos[0], 6);
+    imprimir(first);
+    cout << endl;
+    Rimprimir(first);
+    cout << endl;
+    cout << "Numero de nodos: " << numNodos(first);
+    cout << endl;
+    cout << "Numero de nodos: " << RnumNodos(first);
+    cout << endl;
+    cout << "La suma de todos los nodos es: " << sumaNodos(first);
+    cout << endl;
+    cout << "La suma de todos los nodos es: " << RsumaNodos(first);
+    cout << endl;
+    cout << "El valor maximo de la lista es: " << valMax(first);
+    cout << endl;
+    cout << "El valor maximo de la lista es: " << RvalMax(first);
+    cout << endl;
+    cout << "Direccion del elemento es: " << busqueda(first, 39);
+    cout << endl;
+    cout << "Direccion del elemento es: " << Rbusqueda(first, 39);
+    cout << endl;
+    cout << "Direccion del elemento es: " << busquedaMejorada(first, 115);
+    cout << endl;
+    imprimir(first);
+    insertar(first, 3, 95);
+    cout << endl;
+    /*insertarFinal(1);
     insertarFinal(2);
     insertarFinal(3);
     insertarFinal(4);
     insertarFinal(5);
     insertarFinal(6);
-    insertar(4, 10);
+    insertar(4, 10);*/
     imprimir(first);
     return 0;
 }
