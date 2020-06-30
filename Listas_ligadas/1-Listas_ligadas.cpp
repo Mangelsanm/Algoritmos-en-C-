@@ -6,7 +6,7 @@ struct Nodo
     /* data */
     int dato;
     struct Nodo *next;
-}*first = NULL;
+}*first = NULL, *final = NULL;
 
 void crearNodo(int *elementos, int nElements) {
     struct Nodo *last;
@@ -176,6 +176,23 @@ void insertar(struct Nodo *lista, int indice, int elemento) {
         lista->next = temporal;
     }
 }
+//Funcion para insertar un elemento nuevo a la lista, pero siempre al final.
+void insertarFinal(int valor) {
+    struct Nodo *temporal = (struct Nodo*)malloc(sizeof(struct Nodo));
+    temporal->dato = valor;
+    temporal->next = NULL;
+
+    //Si la lista esta vacia, first y final apuntan a NULL
+    if(first == NULL) {
+        first = final = temporal;
+    }
+    //Si la lista ya tiene al menos un elemento
+    else {
+        final->next = temporal;
+        final = temporal;
+    }
+
+}
 
 int main() {
     int elementos[] = {3, 6, 39, 12, 115, 1};
@@ -205,6 +222,13 @@ int main() {
     imprimir(first);
     insertar(first, 3, 95);
     cout << endl;
+    /*insertarFinal(1);
+    insertarFinal(2);
+    insertarFinal(3);
+    insertarFinal(4);
+    insertarFinal(5);
+    insertarFinal(6);
+    insertar(4, 10);*/
     imprimir(first);
     return 0;
 }
