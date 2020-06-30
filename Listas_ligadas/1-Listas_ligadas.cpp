@@ -191,13 +191,44 @@ void insertarFinal(int valor) {
         final->next = temporal;
         final = temporal;
     }
+}
+//Funcion para insertar un elemento en una lista ordenada
+void insertarOrdenada(struct Nodo *lista, int elemento) {
+    //Crear un nodo temporal
+    struct Nodo *temporal, *previo = NULL;
+    temporal = (struct Nodo*)malloc(sizeof(struct Nodo));
+    temporal->dato = elemento;
+    temporal->next = NULL;
 
+    //Si no tenemos elementos en la lista, esta sera creada con temporal (parametro elemento)
+    if(first == NULL) {
+        first = temporal;
+    }
+    //Si tenemos al menos un elemento en la lista
+    else {
+        while(lista && elemento > lista->dato) {
+            previo = lista;
+            lista = lista->next;
+        }
+        //Si la lista tiene solo un elemento y este es mayor al valor que sera
+        //agregado en la lista.
+        if(lista == first) {
+            temporal->next = first;
+            first = temporal;
+        }
+        //Si tiene mas de un elemento y ya se encontro la posicion donde colocar el nuevo
+        else {
+            temporal->next = previo->next;
+            previo->next = temporal;
+        }
+    }
 }
 
 int main() {
-    int elementos[] = {3, 6, 39, 12, 115, 1};
+    int elementos[] = {3, 6, 9, 12, 15, 18};
     crearNodo(&elementos[0], 6);
-    imprimir(first);
+    insertarOrdenada(first, 8);
+    /*imprimir(first);
     cout << endl;
     Rimprimir(first);
     cout << endl;
@@ -221,7 +252,7 @@ int main() {
     cout << endl;
     imprimir(first);
     insertar(first, 3, 95);
-    cout << endl;
+    cout << endl;*/
     /*insertarFinal(1);
     insertarFinal(2);
     insertarFinal(3);
