@@ -223,11 +223,42 @@ void insertarOrdenada(struct Nodo *lista, int elemento) {
         }
     }
 }
+//Funcion para borrar un nodo de la lista, se regresa el valor que
+//contenia el nodo eliminado
+int borrar(struct Nodo *lista, int indice) {
+    //Nodo para guardar el elemento previo de la lista
+    struct Nodo *previo = NULL;
+    int x = -1;
+
+    //Verificar si el indice a borrar es valido
+    if((indice < 1) || (indice > numNodos(lista))) {
+        return -1;
+    }
+    //Si el indice a eliminar es el primero
+    if(indice == 1) {
+        previo = first;
+        x = first->dato;
+        first = first->next; //first se mueve al siguiente nodo
+        free(previo);
+        return x; 
+    }
+    //Si el nodo a eliminar es diferente del primero
+    else {
+        for(int i = 0; i < indice - 1; i++) {
+            previo = lista;
+            lista = lista->next; //lista se mueve al siguiente nodo
+        }
+        previo->next = lista->next; //previo se enlaza al nodo que apunta lista
+        x = lista->dato;
+        free(lista);
+        return x;
+    }
+}
 
 int main() {
     int elementos[] = {3, 6, 9, 12, 15, 18};
     crearNodo(&elementos[0], 6);
-    insertarOrdenada(first, 8);
+    cout << "El nodo que se elimino tenia el dato: " << borrar(first, 3) <<endl;
     /*imprimir(first);
     cout << endl;
     Rimprimir(first);
