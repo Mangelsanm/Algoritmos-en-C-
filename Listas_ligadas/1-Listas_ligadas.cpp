@@ -254,12 +254,34 @@ int borrar(struct Nodo *lista, int indice) {
         return x;
     }
 }
+//Funcion para saber si una lista esta ordenada
+bool listaOrdenada(struct Nodo *lista) {
+    int valor = INT_MIN;
+
+    while(lista != NULL) {
+        //Asumimos que la lista esta ordenada, si no es asi
+        //regresamos false. Usamos una condicion de fallo (inversa)
+        if(lista->dato < valor) {
+            return false;
+        }
+        valor = lista->dato;
+        lista = lista->next;
+    }
+    return true;
+}
 
 int main() {
-    int elementos[] = {3, 6, 9, 12, 15, 18};
+    int elementos[] = {3, 6, 9, 121, 15, 18};
     crearNodo(&elementos[0], 6);
-    cout << "El nodo que se elimino tenia el dato: " << borrar(first, 3) <<endl;
-    /*imprimir(first);
+    if(listaOrdenada(first)) {
+        cout << "La lista esta ordenada" << endl;
+    }
+    else {
+        cout << "La lista no esta ordenada" << endl;
+    }
+    
+    /*cout << "El nodo que se elimino tenia el dato: " << borrar(first, 3) <<endl;
+    imprimir(first);
     cout << endl;
     Rimprimir(first);
     cout << endl;
