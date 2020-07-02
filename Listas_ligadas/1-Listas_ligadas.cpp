@@ -269,18 +269,38 @@ bool listaOrdenada(struct Nodo *lista) {
     }
     return true;
 }
+//Funcion para remover valores duplicados en una lista ligada
+void removerDuplicados(struct Nodo *lista) {
+    //Crear nodo previo e igualarlo al primer nodo y
+    //Adelantar el primer nodo al siguiente (lista->next)
+    struct Nodo *previo = lista;
+    lista = lista->next;
+
+    while(lista != NULL) {
+        if(lista->dato != previo->dato) {
+            previo = lista;
+            lista = lista->next;
+        }
+        else {
+            previo->next = lista->next;
+            free(lista);
+            lista = previo->next;
+        }
+    }
+}
 
 int main() {
-    int elementos[] = {3, 6, 9, 121, 15, 18};
-    crearNodo(&elementos[0], 6);
-    if(listaOrdenada(first)) {
+    int elementos[] = {20, 20, 20, 40, 40, 50, 60, 70, 70};
+    crearNodo(&elementos[0], 9);
+    removerDuplicados(first);
+    /*if(listaOrdenada(first)) {
         cout << "La lista esta ordenada" << endl;
     }
     else {
         cout << "La lista no esta ordenada" << endl;
     }
     
-    /*cout << "El nodo que se elimino tenia el dato: " << borrar(first, 3) <<endl;
+    cout << "El nodo que se elimino tenia el dato: " << borrar(first, 3) <<endl;
     imprimir(first);
     cout << endl;
     Rimprimir(first);
