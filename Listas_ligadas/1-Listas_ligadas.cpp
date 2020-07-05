@@ -288,12 +288,32 @@ void removerDuplicados(struct Nodo *lista) {
         }
     }
 }
+//Funcion para invertir una lista ligada
+void invertirLista(struct Nodo *lista) {
+    struct Nodo *previo = NULL;
+    struct Nodo *temporal = NULL;
+
+    while(lista != NULL) {
+        //Recorremos todo los nodos al siguiente
+        temporal = previo;
+        previo = lista;
+        lista = lista->next;
+        //apuntamos al nodo anterior para invertir la lista
+        previo->next = temporal;
+    }
+    //Ahora 
+    first = previo;
+}
 
 int main() {
     int elementos[] = {20, 20, 20, 40, 40, 50, 60, 70, 70};
     crearNodo(&elementos[0], 9);
-    removerDuplicados(first);
-    /*if(listaOrdenada(first)) {
+
+    invertirLista(first);
+    imprimir(first);
+
+    /*removerDuplicados(first);
+    if(listaOrdenada(first)) {
         cout << "La lista esta ordenada" << endl;
     }
     else {
@@ -333,6 +353,5 @@ int main() {
     insertarFinal(5);
     insertarFinal(6);
     insertar(4, 10);*/
-    imprimir(first);
     return 0;
 }
