@@ -6,7 +6,7 @@ struct Nodo
     /* data */
     int dato;
     struct Nodo *next;
-}*first = NULL, *final = NULL;
+}*first = NULL, *second = NULL, *tercero = NULL, *final = NULL;
 
 void crearNodo(int *elementos, int nElements) {
     struct Nodo *last;
@@ -30,6 +30,30 @@ void crearNodo(int *elementos, int nElements) {
         last = temp;
     }
 }
+
+void crearNodo2(int *elementos, int nElements) {
+    struct Nodo *last;
+    struct Nodo *temp;
+
+    second = (struct Nodo*)malloc(sizeof(struct Nodo));
+    second->dato = elementos[0];
+    second->next = NULL;
+    //El puntero last servira para hacer el enlace entre nodos.
+    last = second;
+
+    for(int i = 1; i < nElements; i++) {
+        //Se crea un nodo para el elemento i del arreglo.
+        temp = (struct Nodo*)malloc(sizeof(struct Nodo));
+        temp->dato = elementos[i];
+        temp->next = NULL;
+        
+        //Linkea el nodo anterior (second en la primera iteracion, temp despues de la primer iteracion)
+        //con el nodo creado anteriormente.
+        last->next = temp;
+        last = temp;
+    }
+}
+
 //Funcion para imprimir la lista ligada.
 void imprimir(struct Nodo *lista) {
     while(lista) {
@@ -304,15 +328,60 @@ void invertirLista(struct Nodo *lista) {
     //Ahora 
     first = previo;
 }
+//Funcion para combinar dos listas ordenadas
+void combinar(struct Nodo *primero, struct Nodo *segundo) {
+    struct Nodo *ultimo;
+
+    //Determiamos cual de las dos listas tiene el valor mas pequeño 
+    if(primero->dato < segundo->dato) {
+        tercero = ultimo = primero;
+        primero = primero->next;
+        tercero->next = NULL;
+        
+    }
+    else {
+        tercero = ultimo = segundo;
+        segundo = segundo->next;
+        tercero->next = NULL;
+        
+    }
+    //Seguimos con el resto de valores para las dos listas
+    while((primero != NULL) && (segundo != NULL)) {
+    if(primero->dato < segundo->dato) {
+        ultimo->next = primero;
+        ultimo = primero;
+        primero = primero->next;
+        ultimo->next = NULL;
+    }
+    else {
+        ultimo->next = segundo;
+        ultimo = segundo;
+        segundo = segundo->next;
+        ultimo->next = NULL;
+    }
+    }
+    if(primero)
+        ultimo->next = primero;
+    if(segundo)
+        ultimo->next = segundo;
+}
 
 int main() {
-    int elementos[] = {20, 20, 20, 40, 40, 50, 60, 70, 70};
-    crearNodo(&elementos[0], 9);
+    int elementos[] = {4, 8, 12, 16, 20};
+    int elementos2[] = {2, 6, 10, 14, 18};
+    crearNodo(&elementos[0], 5);
+    crearNodo2(&elementos2[0], 5);
 
-    invertirLista(first);
+    cout << "Primer lista: ";
     imprimir(first);
+    cout << "\nSegunda lista: ";
+    imprimir(second);
+    cout << "\n";
+    combinar(first, second);
+    imprimir(tercero);
 
-    /*removerDuplicados(first);
+    /*invertirLista(first);
+    removerDuplicados(first);
     if(listaOrdenada(first)) {
         cout << "La lista esta ordenada" << endl;
     }
