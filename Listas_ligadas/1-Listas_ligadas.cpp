@@ -365,10 +365,38 @@ void combinar(struct Nodo *primero, struct Nodo *segundo) {
     if(segundo)
         ultimo->next = segundo;
 }
+//Funcion para saber si una lista es un LOOP
+int LOOP(struct Nodo *lista) {
+    struct Nodo *temporal;
+    struct Nodo *previo;
+    temporal = previo = lista;
+
+    do {
+        temporal = temporal->next;
+        previo = previo->next;
+        previo = previo ? previo->next : previo;
+    } while (temporal && previo && (temporal != previo));
+
+    if(temporal == previo) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
 
 int main() {
+    struct Nodo *temp1, *temp2;
     int elementos[] = {4, 8, 12, 16, 20};
-    int elementos2[] = {2, 6, 10, 14, 18};
+    crearNodo(&elementos[0], 5);
+
+    temp1 = first->next->next;
+    temp2 = first->next->next->next->next;
+    temp2->next = temp1;
+
+    cout << LOOP(first);
+
+    /*int elementos2[] = {2, 6, 10, 14, 18};
     crearNodo(&elementos[0], 5);
     crearNodo2(&elementos2[0], 5);
 
@@ -378,7 +406,7 @@ int main() {
     imprimir(second);
     cout << "\n";
     combinar(first, second);
-    imprimir(tercero);
+    imprimir(tercero);*/
 
     /*invertirLista(first);
     removerDuplicados(first);
