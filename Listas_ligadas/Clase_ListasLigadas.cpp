@@ -12,16 +12,18 @@ class ListaLigada {
     Nodo *first;
 
     public:
-    ListaLigada() {first = NULL;}
+    ListaLigada();
     ListaLigada(int *elementos, int nElementos);
-    //~ListaLigada();
+    ~ListaLigada();
     void imprimir();
-    void insertar(int indice, int valor);
-    /*int borrar(int indice);*/
     int longitud();
+    void insertar(int indice, int valor);
+    int eliminar(int indice);
 };
-
-ListaLigada::ListaLigada(int *elementos, int nElementos){
+ListaLigada::ListaLigada() {
+    first = NULL;
+}
+ListaLigada::ListaLigada(int *elementos, int nElementos) {
     Nodo *final;
     Nodo *temporal;
 
@@ -36,6 +38,14 @@ ListaLigada::ListaLigada(int *elementos, int nElementos){
         temporal->next = NULL;
         final->next = temporal;
         final = temporal;
+    }
+}
+ListaLigada::~ListaLigada() {
+    Nodo *lista = first;
+    while(first != NULL) {
+        first = first->next;
+        delete lista;
+        lista = first;
     }
 }
 void ListaLigada::imprimir() {
@@ -75,6 +85,29 @@ void ListaLigada::insertar(int indice, int valor) {
         }
         temporal->next = lista->next;
         lista->next = temporal;
+    }
+}
+int ListaLigada::eliminar(int indice) {
+    Nodo *lista = first;
+    Nodo *previo = NULL;
+    int valor = 0;
+
+    if(indice < 0 || indice > longitud()){
+        return;
+    }
+
+    if(indice == 0) {
+        previo = first;
+        valor = lista->dato;
+        first = first->next;
+        delete lista;
+        return valor;
+    }
+    else {
+        for(int i = 0; i < indice - 1; i++) {
+            lista = lista->next;
+        }
+        lista->next = 
     }
 }
 
