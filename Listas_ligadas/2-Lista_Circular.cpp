@@ -35,9 +35,22 @@ void imprimir(struct Nodo *lista) {
         lista = lista->next;
     }while(lista != Head);
 }
+//Funcion para contar el numero de nodos en una lista circular.
+int longitud(struct Nodo *lista) {
+    int contador = 0;
+    do {
+        contador++;
+        lista = lista->next;
+    } while(lista != Head);
+    return contador;
+}
 //Funcion para insertar un elemento en la lista.
 void insertar(struct Nodo *lista, int indice, int valor) {
     struct Nodo *temp;
+
+    if(indice < 0 || indice > longitud(Head)) {
+        return;
+    }
 
     //Insertar antes de Head, indice igual a cero.
     if(indice == 0) {
@@ -73,6 +86,6 @@ void insertar(struct Nodo *lista, int indice, int valor) {
 int main() {
     int elementos[] = {1, 5, 6, 0};
     crearLista(&elementos[0], 4);
-    insertar(Head, 1, 9);
+    insertar(Head, 10, 9);
     imprimir(Head);
 }
