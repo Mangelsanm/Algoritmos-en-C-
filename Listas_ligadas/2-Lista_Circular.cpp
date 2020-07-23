@@ -82,10 +82,45 @@ void insertar(struct Nodo *lista, int indice, int valor) {
         lista->next = temp;
     }
 }
+//Funcion para eliminar un nodo.
+void eliminar(struct Nodo *lista, int indice) {
+    //Condicion para validar si el indice es correcto.
+    if(indice < 1 || indice > longitud(Head)){
+        return;
+    }
+    //Si el indice es 1.
+    if(indice == 1) {
+        while(lista->next != Head) {
+            lista = lista->next;
+        }
+        //Si la lista circular solo tiene un elemento.
+        if(lista == Head) {
+            free(Head);
+            Head = NULL;
+        }
+        //Si la lista tiene mas de un elemento.
+        else {
+            lista->next = Head->next;
+            free(Head);
+            Head = lista->next;
+        }
+    }
+    //Si el indice es diferente de 1.
+    else {
+        struct Nodo *temporal;
+        for(int i = 0; i < indice - 2; i++){
+            lista = lista->next;
+        }
+        temporal = lista->next;
+        lista->next = temporal->next;
+        free(temporal);
+    }
+}
 
 int main() {
     int elementos[] = {1, 5, 6, 0};
     crearLista(&elementos[0], 4);
-    insertar(Head, 10, 9);
+    insertar(Head, 2, 9);
+    eliminar(Head, 4);
     imprimir(Head);
 }
