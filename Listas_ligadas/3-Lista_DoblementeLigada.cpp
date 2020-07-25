@@ -73,11 +73,42 @@ void insertar(struct Nodo *lista, int indice, int valor) {
         lista->next = temporal;
     }
 }
+//Funcion para borrar un elemento de la lista.
+int borrar(struct Nodo *lista, int indice) {
+    int valor = 0;
+    //El indice enviado es valido?
+    if(indice < 1 || indice > longitud(lista)) {
+        return -1;
+    }
+    if(indice == 1) {
+        first = first->next;
+        //Verificar que el nuevo puntero first es valido
+        if(first != NULL){
+            first->prev = NULL;
+        }
+        valor = lista->dato;
+        free(lista);
+    }
+    else {
+        for(int i = 0; i < indice - 1; i++) {
+            lista = lista->next;
+        }
+        lista->prev->next = lista->next;
+        //Verificar si el nodo a borrar es el ultimo.
+        if(lista->next != NULL) {
+            lista->next->prev = lista->prev;
+        }
+        valor = lista->dato;
+        free(lista);
+    }
+    return valor;
+}
 
 int main() {
     int elementos[] = {5, 9, 3, 7, 1};
     crear(&elementos[0], 5);
     insertar(first, 5, 4);
+    borrar(first, 3);
     cout << "Longitud: " << longitud(first) << endl;
     imprimir(first);
 }
