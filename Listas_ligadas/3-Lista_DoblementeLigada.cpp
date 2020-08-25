@@ -103,12 +103,26 @@ int borrar(struct Nodo *lista, int indice) {
     }
     return valor;
 }
+//Funcion para invertir una lista doblemente ligada.
+void invertir(struct Nodo *lista) {
+    struct Nodo *temporal;
+    while(lista != NULL) {
+        temporal = lista->next;
+        lista->next = lista->prev;
+        lista->prev = temporal;
+        lista = lista->prev;
+        if(lista != NULL && lista->next == NULL) {
+            first = lista;
+        }        
+    }
+}
 
 int main() {
     int elementos[] = {5, 9, 3, 7, 1};
     crear(&elementos[0], 5);
     insertar(first, 5, 4);
     borrar(first, 3);
+    invertir(first);
     cout << "Longitud: " << longitud(first) << endl;
     imprimir(first);
 }
