@@ -36,6 +36,21 @@ int pop() {
     return value;
 }
 
+int peek(int position) {
+    int value = -1;
+    struct Stack *temp = top;
+    for(int i = 0; i < position - 1 && temp != NULL; i++) {
+        temp = temp->next;
+    }
+    if(temp != NULL) {
+        value = temp->dato;
+        return value;
+    }
+    else {
+        return value;
+    }
+}
+
 void print() {
     struct Stack *temp;
     temp = top;
@@ -56,6 +71,8 @@ int main() {
     push(14);
     /*Borrar uno de los nodos de la lista, usando la funcion pop*/
     pop();
+    /*Imprime el valor de la posicion deseada*/
+    printf("valor de la posicion: %d\n", peek(5));
     /*Imprime el stack con la lista ligada*/
     print();
     return 0;
