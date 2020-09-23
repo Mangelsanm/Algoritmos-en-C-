@@ -58,6 +58,7 @@ int main() {
     st.push(9);
     st.push(11);
     st.push(7);
+    cout << "valor eliminado: " << st.pop() << endl;
     st.print();
     return 0;
 }
