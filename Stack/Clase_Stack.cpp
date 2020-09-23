@@ -29,6 +29,35 @@ void Stack::push(int value) {
     }
 }
 
+int Stack::pop(){
+    Nodo *temp = new Nodo;
+    int value = -1;
+    if(top == NULL) {
+        cout << "Stack Underflow";
+    }
+    else {
+        temp = top;
+        top = top->next;
+        value = temp->dato;
+        delete temp;
+    }
+    return value;
+}
+
+void Stack::print() {
+    Nodo *temp = top;
+    while(temp != NULL) {
+        cout << temp->dato << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
 int main() {
+    Stack st;
+    st.push(9);
+    st.push(11);
+    st.push(7);
+    st.print();
     return 0;
 }
