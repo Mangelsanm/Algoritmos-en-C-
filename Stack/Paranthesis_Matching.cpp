@@ -29,6 +29,17 @@ void Stack::push(char character) {
     }
 }
 
+void Stack::pop() {
+    Nodo *temp = top;
+    if(top == NULL) {
+        cout << "Stack Underflow" << endl;
+    }
+    else {
+        top = top->next;
+        delete temp;
+    }
+}
+
 void Stack::print() {
     Nodo *temp = top;
     while(temp != NULL) {
@@ -44,6 +55,7 @@ int main() {
     st.push('s');
     st.push('e');
     st.push('t');
+    st.pop();
     st.print();
     return 0;
 }
