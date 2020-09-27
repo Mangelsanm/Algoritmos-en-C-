@@ -14,6 +14,7 @@ public:
     Stack() {top = NULL;}
     void push(char character);
     void pop();
+    bool isBalanced(char *expression);
     void print();
 };
 
@@ -37,6 +38,28 @@ void Stack::pop() {
     else {
         top = top->next;
         delete temp;
+    }
+}
+
+bool Stack::isBalanced(char *expression) {
+    for(int i = 0; expression[i] != '\0'; i++) {
+        if(expression[i] == '(') {
+            push(expression[i]);
+        }
+        else if(expression[i] == ')') {
+            if(top == NULL) {
+                return false;
+            }
+            else {
+                pop();
+            }
+        }
+    }
+    if(top == NULL) {
+        return true;
+    }
+    else {
+        return false;
     }
 }
 
